@@ -1,0 +1,16 @@
+/*
+  Tutorial!
+
+  Supported file types:
+    - XML materials
+    - JSON files
+    - GLSL shaders
+    - AngelScript files
+      (if they contain "void Start()" method, it will be automatically called)
+
+---------
+
+  You can open any text object (materials, scripts, shaders, translation files),
+  simply click on the file icon to open it up in the editor.
+
+*/

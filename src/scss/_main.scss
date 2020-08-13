@@ -1,0 +1,82 @@
+* { margin: 0; padding: 0; }
+
+body {
+  height: 100%;
+
+  background-color: #2b3024;
+
+  overflow: hidden;
+}
+
+.row {
+  width: 100%;
+  display: table;
+}
+.column {
+  height: 100%;
+  display: table-cell;
+  background-color: #242723;
+}
+
+#top-half {
+  height: calc(200vh / 3);
+}
+#bottom-half {
+  height: calc(100vh / 3);
+  border-top: 2px solid #2b3024;
+}
+
+.top-column {
+}
+#ace {
+  width: calc(100vw - 2 * 100vh / 3 * 1.778);
+  min-width: calc(3 * 100px + 36px);
+  height: inherit;
+  position: absolute;
+  top: 0;
+
+  border-bottom: 1px solid #1b1f14;
+}
+#player {
+  width: calc(200vh / 3 * 1.778);
+  max-width: calc(100vw - (3 * 100px + 36px));
+
+  background-color: black;
+  background-image: url(https://libregamewiki.org/images/f/fa/Urho3D.svg);
+  background-size: 60vmin;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.bottom-column {
+  width: calc((100vw - 100vh / 3) / 2);
+}
+#browser {
+}
+#console {
+}
+#logo {
+  width: calc(100vh / 3);
+  background-image: url(/images/tank.png);
+  background-size: 23vh;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+@media (max-aspect-ratio: 4/3) {
+  .bottom-column {
+    width: 50%;
+  }
+  #browser {
+    border-right: none;
+  }
+  #logo {
+    visibility: hidden;
+  }
+}
+
+.resizable {
+  border-right: 2px solid #1b1f14;
+}
+.resizable + .column:not(#player) {
+  border-left: 1px solid #313629;
+}

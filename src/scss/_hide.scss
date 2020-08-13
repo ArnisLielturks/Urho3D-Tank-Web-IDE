@@ -1,0 +1,35 @@
+.hideBox { visibility: hidden; }
+
+label[for^="hide"] {
+  width: 27px;
+  position: relative;
+  float: right;
+
+  background-image: url(/images/arrows_w.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+label[for$="Ace"]:hover {
+  background-image: url(/images/arrows_w.svg), linear-gradient(#425529, #556434 23%, #425529);
+}
+label[for$="Ace"]:active {
+  background-image: url(/images/arrows_w.svg), linear-gradient(#314229, #425529 55%, #314229);
+}
+#hideAce:checked ~ #ace label[for$="Ace"] {
+  background-image: url(/images/arrows_e.svg);
+}
+#hideAce:checked ~ #ace label[for$="Ace"]:hover {
+  background-image: url(/images/arrows_e.svg), linear-gradient(#425529, #556434 23%, #425529);
+}
+#hideAce:checked ~ #ace label[for$="Ace"]:active {
+  background-image: url(/images/arrows_e.svg), linear-gradient(#314229, #425529 55%, #314229);
+}
+
+#hideAce:checked ~ #ace {
+  animation: aceHide 0.125s forwards ease;
+}
+#hideAce:checked ~ #player {
+  width: calc(100vw - 32px);
+  max-width: calc(100vw - 32px);
+}
