@@ -18,6 +18,7 @@
       <div class="button" @click="rerun()" data-toggle="tooltip" title="Restart the preview!">Restart</div>
       <div class="button" @click="downloadSample()" data-toggle="tooltip" title="Download packed sample!">Download</div>
       <label class="hide button" for="hideAce"></label>
+      <img :src="url" v-if="url">
     </header>
     <ul class="nav nav-tabs">
       <li class="nav-item" v-for="(file, index) in openedFiles" :key="index">
@@ -54,7 +55,8 @@ export default {
         name: '',
         content: ''
       },
-      contents: {}
+      contents: {},
+      url: false
     }
   },
   computed: {
@@ -96,6 +98,10 @@ export default {
       console.log(value)
     },
     openFile (file) {
+      if (file.endsWith('.png') || file.endsWith(('.jpg')) || file.endsWith(('.icns'))) {
+        document.getElementById('frame').contentWindow.Module.GetResourceBinary(file)
+        return
+      }
       if (!this.openedFiles.includes(file)) {
         this.openedFiles.push(file)
       }
@@ -148,7 +154,7 @@ export default {
           try {
             content = document.getElementById('frame').contentWindow.Module.GetResource(file)
           } catch (e) {
-            console.log('e', e)
+            console.error(e)
           }
         }
         return content

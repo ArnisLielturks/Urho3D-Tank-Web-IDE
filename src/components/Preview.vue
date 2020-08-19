@@ -18,6 +18,7 @@
 <!--    </div>-->
 <!--    <div v-shortkey="['esc']" @shortkey="exit()">-->
 <!--    </div>-->
+    <div class="button" @click="testPointers()">Test pointers</div>
     <iframe id="frame" src="/player.html" style="width: 100%; height: 100%;" v-if="shouldRun"></iframe>
   </div>
 </template>
@@ -31,6 +32,34 @@ export default {
     }
   },
   methods: {
+    testPointers () {
+      const Module = document.getElementById('frame').contentWindow.Module
+      if (Module.MultiplyArray) {
+        // Create example data to test float_multiply_array
+        const data = new Float32Array([1, 2, 3, 4, 5])
+
+        // Get data byte size, allocate memory on Emscripten heap, and get pointer
+        const nDataBytes = data.length * data.BYTES_PER_ELEMENT
+        const dataPtr = Module._malloc(nDataBytes)
+
+        // Copy data to Emscripten heap (directly accessed from Module.HEAPU8)
+        const dataHeap = new Uint8Array(Module.HEAPU8.buffer, dataPtr, nDataBytes)
+        dataHeap.set(new Uint8Array(data.buffer))
+
+        // const float_multiply_array = Module.cwrap(
+        //   'MultiplyArray', 'number', ['number', 'number', 'number']
+        // );
+        // Call function and get result
+        Module.MultiplyArray(2, dataHeap.byteOffset, data.length)
+        const result = new Float32Array(dataHeap.buffer, dataHeap.byteOffset, data.length)
+
+        console.log('result', result)
+        // Free memory
+        Module._free(dataHeap.byteOffset)
+      } else {
+        console.log('Module doesnt have MultiplyArray function')
+      }
+    },
     exit () {
       this.shouldRun = false
     },

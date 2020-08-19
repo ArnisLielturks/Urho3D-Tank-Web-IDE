@@ -63,7 +63,7 @@
     }
   </style>
 </head>
-<body>
+<body id="body">
 <div class="centered">
   <div class="emscripten" id="status">Downloading...</div>
   <progress hidden id="progress" max=100 value=10></progress>
@@ -231,6 +231,7 @@
       }).catch(e => {
         console.log('/files.js doesnt exist');
       })
+      Module.GetResourceBinary('Textures/Logo.png');
     }, 100);
   }
 
@@ -314,6 +315,27 @@
     },
     AngelScriptLoadFailed: function(item) {
       this.FileLoadFailed(item)
+    },
+    BinaryFileLoaded: function (filename, ptr, size) {
+      // let buffer = new Uint8Array(HEAPU8.subarray(ptr, ptr + size));
+      // const blob = new Blob([buffer], { type: 'image/png' })
+      // const url = URL.createObjectURL(blob)
+      // const img = new Image()
+      // img.onload = function () {
+      //   URL.revokeObjectURL(url)
+      // }
+      //
+      // img.src = url
+      // document.getElementById("body").appendChild(img);
+      // console.log('url', url)
+      window.parent.postMessage({
+        'name': 'binary-file-loaded',
+        'payload': {
+          filename: filename,
+          ptr: ptr,
+          size: size,
+        }
+      }, "*");
     },
 
     print: function(text) {
