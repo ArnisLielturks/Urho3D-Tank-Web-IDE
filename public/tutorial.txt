@@ -5,6 +5,7 @@
     - XML materials
     - JSON files
     - GLSL shaders
+    - JPG, PNG files (preview only)
     - AngelScript files
       (if they contain "void Start()" method, it will be automatically called)
 
