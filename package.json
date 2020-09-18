@@ -1,9 +1,9 @@
 {
-  "name": "beauty-vuejs-boilerplate",
-  "version": "1.0.0",
+  "name": "Urho3D-Tank-Web-IDE",
+  "version": "0.0.1",
   "private": true,
-  "description": "A Vue.js project",
-  "author": "Sasha Zmts <sa.zmts@gmail.com>",
+  "description": "Urho3D-Tank Web IDE",
+  "author": "Arnis Lielturks<>",
   "scripts": {
     "serve": "NODE_ENV=development vue-cli-service serve",
     "build": "vue-cli-service build",

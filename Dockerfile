@@ -1,7 +1,10 @@
 # Compile the project
 FROM node:12.15 as build
 WORKDIR /app
-COPY . /app/
+
+COPY . /app
+
+
 RUN npm install
 RUN npm run build
 
@@ -15,4 +18,7 @@ RUN apk update && \
 
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=build /app/dist /www
-CMD ["nginx", "-g", "daemon off;"]
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+ENTRYPOINT /entrypoint.sh
